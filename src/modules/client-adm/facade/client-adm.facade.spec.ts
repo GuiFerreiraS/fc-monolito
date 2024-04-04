@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { ClientModel } from "../repository/client.model";
 import ClientAdmFacadeFactory from "../factory/facade.factory";
+import Address from "../../@shared/domain/value-object/address.value-object";
 
 describe("ClientAdmFacade test", () => {
   let sequelize: Sequelize;
@@ -28,7 +29,15 @@ describe("ClientAdmFacade test", () => {
       id: "1",
       name: "Client 1",
       email: "client1@email.com",
-      address: "123 Main Street",
+      document: "00.000.00-00",
+      address: new Address({
+        street: "Rua 123",
+        number: "99",
+        complement: "Casa Verde",
+        city: "Criciúma",
+        state: "SC",
+        zipCode: "88888-888",
+      }),
     };
 
     await clientFacade.add(input);
@@ -40,7 +49,12 @@ describe("ClientAdmFacade test", () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.document).toBe(input.document);
+    expect(client.street).toBe(input.address.street);
+    expect(client.number).toBe(input.address.number);
+    expect(client.complement).toBe(input.address.complement);
+    expect(client.city).toBe(input.address.city);
+    expect(client.state).toBe(input.address.state);
   });
 
   it("should find a client", async () => {
@@ -50,7 +64,15 @@ describe("ClientAdmFacade test", () => {
       id: "1",
       name: "Client 1",
       email: "client1@email.com",
-      address: "123 Main Street",
+      document: "00.000.00-00",
+      address: new Address({
+        street: "Rua 123",
+        number: "99",
+        complement: "Casa Verde",
+        city: "Criciúma",
+        state: "SC",
+        zipCode: "88888-888",
+      }),
     };
 
     await clientFacade.add(input);
@@ -61,6 +83,7 @@ describe("ClientAdmFacade test", () => {
     expect(client.id).toBe(input.id);
     expect(client.name).toBe(input.name);
     expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client.document).toBe(input.document);
+    expect(client.address).toEqual(input.address);
   });
 });
