@@ -1,10 +1,10 @@
 import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
 
 @Table({
-  tableName: "products",
+  tableName: "clients",
   timestamps: false,
 })
-export class ProductModel extends Model {
+export class ClientModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
   declare id: string;
@@ -13,20 +13,23 @@ export class ProductModel extends Model {
   declare name: string;
 
   @Column({ allowNull: false })
-  declare description: string;
+  declare email: string;
 
   @Column({ allowNull: false })
-  declare purchasePrice: number;
+  declare street: string;
+
+  @Column({ allowNull: false })
+  declare number: string;
 
   @Column({ allowNull: true })
-  declare salesPrice: number;
-
-  @Column({ allowNull: true })
-  declare stock: number;
+  declare complement: string;
 
   @Column({ allowNull: false })
-  declare createdAt: Date;
+  declare city: string;
 
   @Column({ allowNull: false })
-  declare updatedAt: Date;
+  declare state: string;
+
+  @Column({ allowNull: false })
+  declare zipCode: string;
 }

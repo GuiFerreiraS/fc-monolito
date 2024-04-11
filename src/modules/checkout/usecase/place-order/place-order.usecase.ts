@@ -83,6 +83,8 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
         : null;
 
     if (payment.status === "approved") order.approve();
+    if (invoice && payment.status === "approved")
+      order.setInvoiceId(invoice.id);
     this._repository.addOrder(order);
 
     return {

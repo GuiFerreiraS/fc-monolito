@@ -190,6 +190,11 @@ describe("PlaceOrderUseCase unit test", () => {
         add: jest.fn(),
       };
 
+      const mockInvoiceFacade = {
+        generate: jest.fn().mockResolvedValue({ id: "1i" }),
+        find: jest.fn(),
+      };
+
       const mockPaymentFacade = {
         process: jest.fn(),
       };
@@ -197,11 +202,6 @@ describe("PlaceOrderUseCase unit test", () => {
       const mockCheckoutRepo = {
         addOrder: jest.fn(),
         findOrder: jest.fn(),
-      };
-
-      const mockInvoiceFacade = {
-        generate: jest.fn().mockResolvedValue({ id: "1i" }),
-        find: jest.fn(),
       };
 
       const placeOrderUseCase = new PlaceOrderUseCase(

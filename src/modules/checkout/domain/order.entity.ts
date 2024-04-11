@@ -8,18 +8,25 @@ type OrderProps = {
   client: Client;
   products: Product[];
   status?: string;
+  invoiceId?: string;
 };
 
 export default class Order extends BaseEntity {
   private _client: Client;
   private _products: Product[];
   private _status: string;
+  private _invoiceId: string;
 
   constructor(props: OrderProps) {
     super(props.id);
     this._client = props.client;
     this._products = props.products;
     this._status = props.status || "pending";
+    this._invoiceId = props.invoiceId || null;
+  }
+
+  setInvoiceId(invoiceId: string) {
+    this._invoiceId = invoiceId;
   }
 
   approve() {
@@ -36,6 +43,9 @@ export default class Order extends BaseEntity {
 
   get status(): string {
     return this._status;
+  }
+  get invoiceId(): string {
+    return this._invoiceId;
   }
 
   get total(): number {
