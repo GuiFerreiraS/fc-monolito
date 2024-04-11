@@ -8,6 +8,16 @@ export interface AddClientFacadeInputDTO {
   address: Address;
 }
 
+export interface AddClientFacadeOutputDTO {
+  id: string;
+  name: string;
+  email: string;
+  document: string;
+  address: Address;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface FindClientFacadeInputDTO {
   id: string;
 }
@@ -23,6 +33,6 @@ export interface FindClientFacadeOutputDTO {
 }
 
 export default interface ClientAdmFacadeInterface {
-  add(input: AddClientFacadeInputDTO): Promise<void>;
+  add(input: AddClientFacadeInputDTO): Promise<AddClientFacadeOutputDTO>;
   find(input: FindClientFacadeInputDTO): Promise<FindClientFacadeOutputDTO>;
 }
