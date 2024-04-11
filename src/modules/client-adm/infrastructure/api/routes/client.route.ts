@@ -15,8 +15,21 @@ clientRoute.post("/", async (req, res) => {
       address: new Address(req.body.address),
     };
 
-    await clientAdmFacade.add(clientDTO);
-    res.status(201).send();
+    const output = await clientAdmFacade.add(clientDTO);
+    res.status(201).send({
+      id: output.id,
+      name: output.name,
+      email: output.email,
+      document: output.document,
+      address: {
+        street: output.address.street,
+        complement: output.address.complement,
+        number: output.address.number,
+        city: output.address.city,
+        state: output.address.state,
+        zipCode: output.address.zipCode,
+      },
+    });
   } catch (err) {
     if (err instanceof Error) {
       res.status(400).send(err.message);
